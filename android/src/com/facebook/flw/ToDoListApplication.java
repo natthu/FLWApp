@@ -9,8 +9,12 @@ import android.app.Application;
 
 public class ToDoListApplication extends Application {
 
-  public static final String CLIENT_KEY = "nTTqsoV7zXXH44CZQdPRS9eZ9ShcXEbzgCz1uGDs";
-  public static final String APPLICATION_ID = "NPq8I3xej4ijLpuNW5NyZfCMwB59zonOfUVjR3q2";
+  /** Parse application id */
+  public static final String APPLICATION_ID = "41qaY4G3bqSixIBWtavcWAfMScmUjM288KFM4bmA";
+
+  /** Parse client key */
+  public static final String CLIENT_KEY = "rogRhk3NHbGn53BaFkDVyTEwvt3zdDiA7Rwx0Aef";
+
 
   @Override
 	public void onCreate() {
