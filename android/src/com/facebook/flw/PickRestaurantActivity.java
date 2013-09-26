@@ -22,14 +22,12 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
-public class RestaurantsListActivity extends ListActivity {
+public class PickRestaurantActivity extends ListActivity {
 	private static final int ACTIVITY_CREATE = 0;
 	private static final int ACTIVITY_EDIT = 1;
 
 	public static final int INSERT_ID = Menu.FIRST;
-	private static final int DELETE_ID = Menu.FIRST + 1;
 
-	private List<Restaurant> restaurants;
 	private Dialog progressDialog;
 
 	private class FetchLatestEvent extends AsyncTask<Void, Void, Event> {
@@ -50,7 +48,7 @@ public class RestaurantsListActivity extends ListActivity {
 
 		@Override
 		protected void onPreExecute() {
-			RestaurantsListActivity.this.progressDialog = ProgressDialog.show(RestaurantsListActivity.this, "",
+			PickRestaurantActivity.this.progressDialog = ProgressDialog.show(PickRestaurantActivity.this, "",
 					"Loading...", true);
 			super.onPreExecute();
 		}
@@ -64,12 +62,12 @@ public class RestaurantsListActivity extends ListActivity {
 		@Override
 		protected void onPostExecute(Event result) {
 			// Put the list of restaurants into the list view
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(RestaurantsListActivity.this, R.layout.todo_row);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(PickRestaurantActivity.this, R.layout.todo_row);
 			for (Restaurant restaurant : result.getRestaurants()) {
 				adapter.add(restaurant.getName());
 			}
 			setListAdapter(adapter);
-			RestaurantsListActivity.this.progressDialog.dismiss();
+			PickRestaurantActivity.this.progressDialog.dismiss();
 			TextView empty = (TextView) findViewById(android.R.id.empty);
 			empty.setVisibility(View.VISIBLE);
 		}
