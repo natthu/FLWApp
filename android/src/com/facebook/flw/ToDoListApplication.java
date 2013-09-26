@@ -14,6 +14,7 @@ public class ToDoListApplication extends Application {
 
   /** Parse client key */
   public static final String CLIENT_KEY = "rogRhk3NHbGn53BaFkDVyTEwvt3zdDiA7Rwx0Aef";
+  public static final String TAG = ToDoListApplication.class.getSimpleName();
 
 
   @Override
