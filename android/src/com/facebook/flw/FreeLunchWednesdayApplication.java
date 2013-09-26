@@ -2,10 +2,7 @@ package com.facebook.flw;
 
 import android.app.Application;
 import com.facebook.flw.model.Restaurant;
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
+import com.parse.*;
 
 public class FreeLunchWednesdayApplication extends Application {
 
@@ -24,6 +21,7 @@ public class FreeLunchWednesdayApplication extends Application {
     ParseObject.registerSubclass(Restaurant.class);
 
 		Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
+    ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
 
 
 		ParseUser.enableAutomaticUser();
