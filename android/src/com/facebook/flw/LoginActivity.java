@@ -59,6 +59,8 @@ public class LoginActivity extends Activity {
   }
 
   private void onLoginButtonClicked() {
+//      Intent intent = new Intent(this, CreateEventActivity.class);
+//      startActivity(intent);
     LoginActivity.this.progressDialog = ProgressDialog.show(
         LoginActivity.this, "", "Logging in...", true);
     List<String> permissions = Arrays.asList("basic_info");

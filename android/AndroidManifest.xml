@@ -3,6 +3,9 @@
           package="com.facebook.flw"
           android:versionCode="1"
           android:versionName="1.0">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-sdk android:minSdkVersion="16"/>
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:name=".FreeLunchWednesdayApplication">
         <activity android:name=".LoginActivity"
@@ -12,6 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.facebook.LoginActivity" android:label="@string/app_name" />
+        <activity android:name="com.facebook.LoginActivity" android:label="Log into Facebook" />
+        <activity android:name=".CreateEventActivity" android:label="Select Restaurants" />
     </application>
 </manifest>
