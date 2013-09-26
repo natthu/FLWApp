@@ -61,8 +61,7 @@ public class LoginActivity extends Activity {
   private void onLoginButtonClicked() {
     LoginActivity.this.progressDialog = ProgressDialog.show(
         LoginActivity.this, "", "Logging in...", true);
-    List<String> permissions = Arrays.asList("basic_info", "user_about_me",
-        "user_relationships", "user_birthday", "user_location");
+    List<String> permissions = Arrays.asList("basic_info");
     ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
       @Override
       public void done(ParseUser user, ParseException err) {
@@ -84,7 +83,9 @@ public class LoginActivity extends Activity {
   }
 
   private void showUserDetailsActivity() {
-//    Intent intent = new Intent(this, UserDetailsActivity.class);
-//    startActivity(intent);
+    Intent intent = new Intent(this, RedirectActivity.class);
+    Log.i(FreeLunchWednesdayApplication.TAG, "Lets redirect");
+    startActivity(intent);
+    Log.i(FreeLunchWednesdayApplication.TAG, "After start");
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Free Lunch Wednesdays</string>
-    <string name="facebook_app_id">450684615015672</string>
+    <string name="facebook_app_id">530733936997583</string>
     <string name="action_settings">Settings</string>
     <string name="login">Log In</string>
     <string name="logout">Log Out</string>

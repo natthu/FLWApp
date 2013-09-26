@@ -34,8 +34,11 @@ public class PickRestaurantActivity extends ListActivity {
 		// Override this method to do custom remote calls
 		protected Event doInBackground(Void... params) {
 
-			ParseQuery<Event> query = new ParseQuery<Event>("Restaurants");
-			query.orderByDescending("_created_at");
+			ParseQuery<Event> query = new ParseQuery<Event>("Restaurants")
+        .orderByDescending("_created_at");
+
+      query.setLimit(1);
+
 
 			try {
 				List<Event> events = query.find();
@@ -173,7 +176,7 @@ public class PickRestaurantActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		Intent intent = new Intent(this, CreateFreeLunchWednesday.class);
 
-		intent.putExtra("name", restaurants.get(position).getString("name").toString());
+//		intent.putExtra("name", restaurants.get(position).getString("name").toString());
 		intent.putExtra("position", position);
 		startActivityForResult(intent, ACTIVITY_EDIT);
 	}
