@@ -6,17 +6,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.facebook.flw.model.Event;
+import com.facebook.flw.model.Restaurant;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.List;
@@ -28,22 +29,23 @@ public class RestaurantsListActivity extends ListActivity {
 	public static final int INSERT_ID = Menu.FIRST;
 	private static final int DELETE_ID = Menu.FIRST + 1;
 
-	private List<ParseObject> todos;
+	private List<Restaurant> restaurants;
 	private Dialog progressDialog;
 
-	private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+	private class FetchLatestEvent extends AsyncTask<Void, Void, Event> {
 		// Override this method to do custom remote calls
-		protected Void doInBackground(Void... params) {
-			// Gets the current list of todos in sorted order
-			ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Todo");
+		protected Event doInBackground(Void... params) {
+
+			ParseQuery<Event> query = new ParseQuery<Event>("Restaurants");
 			query.orderByDescending("_created_at");
 
 			try {
-				todos = query.find();
+				List<Event> events = query.find();
+			  return events.get(0);
 			} catch (ParseException e) {
-
+        Log.e(FreeLunchWednesdayApplication.TAG, "oops", e);
+        return null;
 			}
-			return null;
 		}
 
 		@Override
@@ -60,12 +62,11 @@ public class RestaurantsListActivity extends ListActivity {
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
-			// Put the list of todos into the list view
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(RestaurantsListActivity.this,
-					R.layout.todo_row);
-			for (ParseObject todo : todos) {
-				adapter.add((String) todo.get("name"));
+		protected void onPostExecute(Event result) {
+			// Put the list of restaurants into the list view
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(RestaurantsListActivity.this, R.layout.todo_row);
+			for (Restaurant restaurant : result.getRestaurants()) {
+				adapter.add(restaurant.getName());
 			}
 			setListAdapter(adapter);
 			RestaurantsListActivity.this.progressDialog.dismiss();
@@ -83,14 +84,14 @@ public class RestaurantsListActivity extends ListActivity {
 		TextView empty = (TextView) findViewById(android.R.id.empty);
 		empty.setVisibility(View.INVISIBLE);
 
-		new RemoteDataTask().execute();
-		registerForContextMenu(getListView());
+		new FetchLatestEvent().execute();
+//		registerForContextMenu(getListView());
 	}
 
-	private void createTodo() {
-		Intent i = new Intent(this, CreateTodo.class);
-		startActivityForResult(i, ACTIVITY_CREATE);
-	}
+//	private void createTodo() {
+//		Intent i = new Intent(this, CreateFreeLunchWednesday.class);
+//		startActivityForResult(i, ACTIVITY_CREATE);
+//	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -102,37 +103,37 @@ public class RestaurantsListActivity extends ListActivity {
 
 		switch (requestCode) {
 		case ACTIVITY_CREATE:
-			new RemoteDataTask() {
-				protected Void doInBackground(Void... params) {
-					String name = extras.getString("name");
-					ParseObject todo = new ParseObject("Todo");
-					todo.put("name", name);
-					try {
-						todo.save();
-					} catch (ParseException e) {
-					}
-
-					super.doInBackground();
-					return null;
-				}
-			}.execute();
+//			new FetchLatestEvent() {
+//				protected Void doInBackground(Void... params) {
+//					String name = extras.getString("name");
+//					ParseObject todo = new ParseObject("Todo");
+//					todo.put("name", name);
+//					try {
+//						todo.save();
+//					} catch (ParseException e) {
+//					}
+//
+//					super.doInBackground();
+//					return null;
+//				}
+//			}.execute();
 			break;
 		case ACTIVITY_EDIT:
 			// Edit the remote object
-			final ParseObject todo;
-			todo = todos.get(extras.getInt("position"));
-			todo.put("name", extras.getString("name"));
-
-			new RemoteDataTask() {
-				protected Void doInBackground(Void... params) {
-					try {
-						todo.save();
-					} catch (ParseException e) {
-					}
-					super.doInBackground();
-					return null;
-				}
-			}.execute();
+//			final ParseObject todo;
+//			todo = restaurants.get(extras.getInt("position"));
+//			todo.put("name", extras.getString("name"));
+//
+//			new FetchLatestEvent() {
+//				protected Void doInBackground(Void... params) {
+//					try {
+//						todo.save();
+//					} catch (ParseException e) {
+//					}
+//					super.doInBackground();
+//					return null;
+//				}
+//			}.execute();
 			break;
 		}
 	}
@@ -153,23 +154,7 @@ public class RestaurantsListActivity extends ListActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case DELETE_ID:
-			AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 
-			// Delete the remote object
-			final ParseObject todo = todos.get(info.position);
-
-			new RemoteDataTask() {
-				protected Void doInBackground(Void... params) {
-					try {
-						todo.delete();
-					} catch (ParseException e) {
-					}
-					super.doInBackground();
-					return null;
-				}
-			}.execute();
-			return true;
 		}
 		return super.onContextItemSelected(item);
 	}
@@ -178,7 +163,7 @@ public class RestaurantsListActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case INSERT_ID:
-			createTodo();
+//			createTodo();
 			return true;
 		}
 
@@ -188,11 +173,11 @@ public class RestaurantsListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent i = new Intent(this, CreateTodo.class);
+		Intent intent = new Intent(this, CreateFreeLunchWednesday.class);
 
-		i.putExtra("name", todos.get(position).getString("name").toString());
-		i.putExtra("position", position);
-		startActivityForResult(i, ACTIVITY_EDIT);
+		intent.putExtra("name", restaurants.get(position).getString("name").toString());
+		intent.putExtra("position", position);
+		startActivityForResult(intent, ACTIVITY_EDIT);
 	}
 
 }

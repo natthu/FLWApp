@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CreateTodo extends Activity {
+public class CreateFreeLunchWednesday extends Activity {
 
 	private EditText nameText;
 	private int position;
