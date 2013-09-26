@@ -1,11 +1,11 @@
 package com.facebook.flw;
 
+import android.app.Application;
+import com.facebook.flw.model.Restaurant;
 import com.parse.Parse;
 import com.parse.ParseACL;
-
+import com.parse.ParseObject;
 import com.parse.ParseUser;
-
-import android.app.Application;
 
 public class FreeLunchWednesdayApplication extends Application {
 
@@ -20,6 +20,8 @@ public class FreeLunchWednesdayApplication extends Application {
   @Override
 	public void onCreate() {
 		super.onCreate();
+
+    ParseObject.registerSubclass(Restaurant.class);
 
 		Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
 
