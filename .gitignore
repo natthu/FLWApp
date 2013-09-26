@@ -20,3 +20,5 @@ local.properties
 .project
 
 *.swp
+
+android/\.idea/*.xml
