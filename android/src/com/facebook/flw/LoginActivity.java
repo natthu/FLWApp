@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -27,21 +28,21 @@ public class LoginActivity extends Activity {
 
     setContentView(R.layout.login);
 
-//    loginButton = (Button) findViewById(R.id.loginButton);
-//    loginButton.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        onLoginButtonClicked();
-//      }
-//    });
-//
-//    // Check if there is a currently logged in user
-//    // and they are linked to a Facebook account.
-//    ParseUser currentUser = ParseUser.getCurrentUser();
-//    if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
-//      // Go to the user info activity
-//      showUserDetailsActivity();
-//    }
+    loginButton = (Button) findViewById(R.id.loginButton);
+    loginButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        onLoginButtonClicked();
+      }
+    });
+
+    // Check if there is a currently logged in user
+    // and they are linked to a Facebook account.
+    ParseUser currentUser = ParseUser.getCurrentUser();
+    if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
+      // Go to the user info activity
+      showUserDetailsActivity();
+    }
   }
 
   @Override
