@@ -16,19 +16,19 @@ public class FreeLunchWednesdayApplication extends Application {
 
   @Override
 	public void onCreate() {
-		super.onCreate();
+      super.onCreate();
 
-    ParseObject.registerSubclass(Restaurant.class);
+      ParseObject.registerSubclass(Restaurant.class);
 
-		Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
-    ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
+      Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
+      ParseFacebookUtils.initialize(APPLICATION_ID);
 
 
-		ParseUser.enableAutomaticUser();
-		ParseACL defaultACL = new ParseACL();
-		// Optionally enable public read access.
-		// defaultACL.setPublicReadAccess(true);
-		ParseACL.setDefaultACL(defaultACL, true);
+      ParseUser.enableAutomaticUser();
+      ParseACL defaultACL = new ParseACL();
+      // Optionally enable public read access.
+      // defaultACL.setPublicReadAccess(true);
+      ParseACL.setDefaultACL(defaultACL, true);
 	}
 
 }
