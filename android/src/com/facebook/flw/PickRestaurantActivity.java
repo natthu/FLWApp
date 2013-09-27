@@ -24,8 +24,7 @@ public class PickRestaurantActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.main);
-    setTitle("Pick Restaurant");
+        setTitle("Pick Restaurant");
 
 //		TextView empty = (TextView) findViewById(android.R.id.empty);
 //		empty.setVisibility(View.INVISIBLE);
