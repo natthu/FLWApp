@@ -21,10 +21,10 @@ public class Event extends ParseObject {
   }
 
   public List<Restaurant> getRestaurants() {
-    return getList("restaurants");
+    return getList("places");
   }
 
   public void addRestaurants(ArrayList<Restaurant> restaurants) {
-    put("restaurants", restaurants);
+    put("places", restaurants);
   }
 }
