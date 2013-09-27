@@ -26,6 +26,7 @@ public class CreateEventActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
+      setTitle("Choose Restaurants");
 
         ListView list = (ListView)findViewById(R.id.rest_list);
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);

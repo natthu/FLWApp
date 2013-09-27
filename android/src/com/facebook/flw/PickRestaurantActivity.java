@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -118,11 +119,12 @@ public class PickRestaurantActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(this, CreateFreeLunchWednesday.class);
+//		Intent intent = new Intent(this, CreateFreeLunchWednesday.class);
 
 //		intent.putExtra("name", restaurants.get(position).getString("name").toString());
-		intent.putExtra("position", position);
-		startActivityForResult(intent, ACTIVITY_EDIT);
+//		intent.putExtra("position", position);
+//		startActivityForResult(intent, ACTIVITY_EDIT);
+    Log.i("ostrulovich", "Hello!");
 	}
 
 }
