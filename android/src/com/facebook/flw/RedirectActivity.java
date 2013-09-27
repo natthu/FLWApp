@@ -17,7 +17,7 @@ public class RedirectActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Intent intent = new Intent(this, PickRestaurantActivity.class);
+    Intent intent = new Intent(this, CreateEventActivity.class);
     Log.i(FreeLunchWednesdayApplication.TAG, "Lets redirect");
     startActivity(intent);
   }
