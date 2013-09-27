@@ -3,6 +3,7 @@ package com.facebook.flw.model;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,5 +22,9 @@ public class Event extends ParseObject {
 
   public List<Restaurant> getRestaurants() {
     return getList("restaurants");
+  }
+
+  public void addRestaurants(ArrayList<Restaurant> restaurants) {
+    put("restaurants", restaurants);
   }
 }
