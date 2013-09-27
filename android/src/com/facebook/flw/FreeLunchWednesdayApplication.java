@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
+import com.facebook.flw.model.Event;
 import com.facebook.flw.model.Restaurant;
 import com.parse.*;
 
@@ -42,6 +43,7 @@ public class FreeLunchWednesdayApplication extends Application {
     }
 
       ParseObject.registerSubclass(Restaurant.class);
+      ParseObject.registerSubclass(Event.class);
 
       Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
       ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));

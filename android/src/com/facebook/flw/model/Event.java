@@ -21,7 +21,7 @@ public class Event extends ParseObject {
   }
 
   public List<Restaurant> getRestaurants() {
-    return getList("places");
+    return has("places") ? this.<Restaurant>getList("places") : new ArrayList<Restaurant>();
   }
 
   public void addRestaurants(ArrayList<Restaurant> restaurants) {
